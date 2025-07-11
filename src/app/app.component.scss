@@ -1,0 +1,18 @@
+@import "tailwindcss";
+:root{
+  --light-grey-color:#D1D1D6;
+  --light-color:#FFFFFF;
+  --dark-color:#000000;
+  --primary-color:#2F80ED;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: Roboto,sans-serif;
+  background: #6b7280;
+}

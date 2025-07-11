@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="post-header">
+    <div class="post-title">
+      <span>Post</span>
+    </div>
+    <div class="demo-button-container">
+      <button mat-button="elevated" (click)="addNewData()" class="demo-button">
+        Add data
+        <img src="/images/svgs/add.svg" class="add" alt="add">
+      </button>
+    </div>
+  </div>
+  <div class="post-content">
+    <table class="post-table">
+      <thead>
+        <tr>
+          <th>Delivery billable</th>
+          <th>Delivery unbillable</th>
+          <th>Administration</th>
+          <th>CEO</th>
+          <th>Sales</th>
+          <th>Marketing</th>
+          <th>Finance</th>
+          <th>HR</th>
+          <th>IT</th>
+          <th>Legal</th>
+          <th>PPS</th>
+          <th>L &amp; D</th>
+          <th>OG</th>
+          <th>OBS</th>
+          <th>EBO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>233</td>
+          <td>11</td>
+          <td>8</td>
+          <td>1</td>
+          <td>15</td>
+          <td>11</td>
+          <td>8</td>
+          <td>4</td>
+          <td>3</td>
+          <td>2</td>
+          <td>15</td>
+          <td>1</td>
+          <td>5</td>
+          <td>2</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="summary">
+      <span>Delivery:581</span>
+      <span>Non-delivery: 132</span>
+      <span>Total: 713</span>
+    </div>
+  </div>
+</div>
+
+<div class="employee-table-container">
+  <table class="employee-table">
+    <thead class="employee-table-header">
+      <tr class="employee-table-header-row">
+        <th class="employee-table-header-cell">ID</th>
+        <th class="employee-table-header-cell">User ID</th>
+        <th class="employee-table-header-cell">Title</th>
+        <th class="employee-table-header-cell">Body</th>
+      </tr>
+    </thead>
+    <tbody class="employee-table-body">
+      <tr class="employee-table-row" *ngFor="let element of dataSource.connect() | async">
+        <td class="employee-table-cell">{{ element.id }}</td>
+        <td class="employee-table-cell">{{ element.userId }}</td>
+        <td class="employee-table-cell">{{ element.title }}</td>
+        <td class="employee-table-cell">{{ element.body }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
