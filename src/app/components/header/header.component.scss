@@ -20,6 +20,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+.header-name-avatar{
   padding: 0 20px 0 0;
 }
 
@@ -29,9 +31,28 @@
   align-items: center;
   padding: 8px 16px;
   background-color: #fff;
-  border-bottom: 1px solid #ddd;
   font-family: Arial, sans-serif;
+  width: 100%;
 }
+.example-action-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 26px;
+}
+.arrowDown {
+  background-image: url("/images/svgs/arrowDown.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 10px;
+  height: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+}
+
 
 .search-box {
   display: flex;
@@ -46,8 +67,9 @@
 
 .search-box .search-icon {
   font-size: 16px;
-  color: #1976d2; /* Blue icon similar to the image */
+  color: #1976d2;
   margin-right: 8px;
+  margin-top: 9px;
 }
 
 .search-box input {

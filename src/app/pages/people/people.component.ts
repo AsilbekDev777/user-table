@@ -1,49 +1,31 @@
 import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
 import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable,
   MatTableDataSource
 } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { UserTableService } from '../../data/services/user-table.service';
 import { UserInterface } from '../../data/interfaces/user-table.interface';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {MatButton} from '@angular/material/button';
-import {SvgIconComponent} from '../../components/svg-icon/svg-icon.component';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-people',
   standalone: true,
   imports: [
     MatPaginator,
-    MatColumnDef,
-    MatHeaderCell,
-    MatTable,
-    NgIf,
-    MatCell,
-    MatCellDef,
-    MatHeaderCellDef,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatHeaderRow,
-    MatRow,
-    MatButton,
-    SvgIconComponent,
     NgForOf,
     AsyncPipe,
-    // boshqa material komponentlar...
+
   ],
   templateUrl: './people.component.html',
   styleUrl: './people.component.scss'
 })
 export class PeopleComponent implements AfterViewInit {
   userTableService = inject(UserTableService);
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<UserInterface>();
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -57,10 +39,23 @@ export class PeopleComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  addNewData(){
-    this.userTableService.addData({}).subscribe(newUsers => {
-      this.dataSource.data = newUsers;
-      console.log(newUsers);
-    })
+
+  getTotalCount():number {
+    return this.dataSource?.data?.length ?? 0;
   }
+
+  exportToExcel(): void {
+  const dataToExport = this.dataSource.data;
+
+  if (!dataToExport || dataToExport.length === 0) {
+    console.warn('No data to export');
+    return;
+  }
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+  const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const data: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+  FileSaver.saveAs(data, 'exported_data.xlsx');
+}
+
 }

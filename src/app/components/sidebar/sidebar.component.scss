@@ -1,32 +1,25 @@
-:host{
+:host {
   display: block;
-  padding: 20px 12px;
+  padding-top: 20px;
+  padding-left: 12px;
 }
 
 .main-menu {
-  width: 220px;
+  width: 270px;
   background: #ffffff;
   border-radius: 14px;
   padding: 20px 0;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
+
+
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 }
-.main-menu-list-link:hover {
-  background: #e5f0ff;
-  color: #1a73e8;
-  font-weight: 600;
-
-  .icon {
-    fill: #1a73e8;
-  }
-}
-
 
 .main-menu-list-link {
   display: flex;
@@ -34,21 +27,43 @@
   gap: 12px;
   padding: 10px 16px;
   border-radius: 8px;
-  color: #444;
+  color: #000;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
 
-  &:hover {
-    background: #f1f5f9;
-  }
-
   .icon {
     width: 20px;
     height: 20px;
-    fill: #6b7280;
+    color: #8E8E93;
     flex-shrink: 0;
-    transition: fill 0.2s;
+    transition: color 0.2s;
+
+    * {
+      fill: currentColor;
+      transition: fill 0.2s;
+    }
+  }
+
+  &:hover {
+    background: #e5f0ff;
+    color: #2F80ED;
+    font-weight: 600;
+    font-size: 14px;
+
+    .icon {
+      color: #2F80ED;
+    }
+  }
+}
+
+.router-link-active {
+  background: #e5f0ff;
+  color: #2F80ED;
+  font-weight: 600;
+
+  .icon {
+    color: #2F80ED;
   }
 }

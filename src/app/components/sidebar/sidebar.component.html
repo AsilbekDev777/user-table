@@ -1,7 +1,7 @@
 <nav class="main-menu">
   <ul>
     <li class="main-menu-list" *ngFor="let menuItem of menuItems">
-      <a class="main-menu-list-link" [routerLink]="[menuItem.link]" routerLinkActive="router-link-active">
+      <a class="main-menu-list-link" [routerLink]="[menuItem.link]" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">
         <svg [icon]="menuItem.icon" class="icon"></svg>
         <span> {{menuItem.label}}</span>
       </a>

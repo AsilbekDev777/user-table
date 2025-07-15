@@ -1,12 +1,25 @@
+<div class="all-user">
+  <div class="all-user-btn">
+    <button class="all-user-button">
+      <div class="all-users-images">
+        <img src="/images/svgs/people-white.svg" alt="users">
+      </div>
+      <span class="all-users-text">
+        All people
+      </span>
+    </button>
+  </div>
+</div>
+
 <div class="container">
   <div class="post-header">
     <div class="post-title">
       <span>Post</span>
     </div>
     <div class="demo-button-container">
-      <button mat-button="elevated" (click)="addNewData()" class="demo-button">
-        Add data
-        <img src="/images/svgs/add.svg" class="add" alt="add">
+      <button (click)="exportToExcel()" class="export-button">
+        <img src="/images/svgs/add.svg" alt="Download icon" class="export-icon" />
+        <span class="export-text">Export to Excel</span>
       </button>
     </div>
   </div>
@@ -52,14 +65,19 @@
       </tbody>
     </table>
     <div class="summary">
-      <span>Delivery:581</span>
-      <span>Non-delivery: 132</span>
-      <span>Total: 713</span>
+      <span><p class="summary-title">Delivery:</p>581</span>
+      <span><p class="summary-title">Non-delivery:</p> 132</span>
+      <span><p class="summary-title">Total:</p> 713</span>
     </div>
   </div>
 </div>
 
 <div class="employee-table-container">
+  <div class="employee-table__header">
+    <div class="text-header">
+        Found: {{ getTotalCount() }}
+    </div>
+  </div>
   <table class="employee-table">
     <thead class="employee-table-header">
       <tr class="employee-table-header-row">
@@ -70,14 +88,15 @@
       </tr>
     </thead>
     <tbody class="employee-table-body">
-      <tr class="employee-table-row" *ngFor="let element of dataSource.connect() | async">
-        <td class="employee-table-cell">{{ element.id }}</td>
-        <td class="employee-table-cell">{{ element.userId }}</td>
-        <td class="employee-table-cell">{{ element.title }}</td>
-        <td class="employee-table-cell">{{ element.body }}</td>
-      </tr>
+      @for (element of dataSource.connect() | async; track element.id ){
+        <tr class="employee-table-row">
+          <td class="employee-table-cell">{{ element.id }}</td>
+          <td class="employee-table-cell">{{ element.userId }}</td>
+          <td class="employee-table-cell">{{ element.title }}</td>
+          <td class="employee-table-cell">{{ element.body }}</td>
+        </tr>
+      }
     </tbody>
   </table>
-
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

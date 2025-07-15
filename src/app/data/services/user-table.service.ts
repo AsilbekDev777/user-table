@@ -12,7 +12,4 @@ export class UserTableService {
   getPost(){
     return this.http.get<UserInterface[]>(`${this.baseApiUrl}/posts`)
   }
-  addData(param:any){
-    return this.http.post<UserInterface[]>(`${this.baseApiUrl}/posts`, param)
-  }
 }
