@@ -5,9 +5,10 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { UserTableService } from '../../data/services/user-table.service';
 import { UserInterface } from '../../data/interfaces/user-table.interface';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
 import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
+import FileSaver from 'file-saver';
+import {AddNewUsersModalComponent} from './components/add-new-users-modal/add-new-users-modal.component';
 
 
 @Component({
@@ -15,8 +16,9 @@ import * as FileSaver from 'file-saver';
   standalone: true,
   imports: [
     MatPaginator,
-    NgForOf,
     AsyncPipe,
+    NgIf,
+    AddNewUsersModalComponent,
 
   ],
   templateUrl: './people.component.html',
@@ -58,4 +60,20 @@ export class PeopleComponent implements AfterViewInit {
   FileSaver.saveAs(data, 'exported_data.xlsx');
 }
 
+  showModal = false;
+
+  addNewRow() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  saveNewRow(data: UserInterface) {
+    const updatedData = this.dataSource.data.slice();
+    updatedData.push(data);
+    this.dataSource.data = updatedData;
+    this.closeModal();
+  }
 }

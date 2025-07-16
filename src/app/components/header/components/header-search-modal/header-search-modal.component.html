@@ -1,0 +1,39 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-search-container">
+      <img src="/images/svgs/search.svg" alt="search" class="modal-search-image">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="filterUsers()"
+        placeholder="Search by ID or title"
+      />
+    </div>
+
+    <div class="content">
+      @if (loading) {
+        <div class="loading">Loading...</div>
+      } @else {
+        @if (filteredUsers.length === 0) {
+          <div class="no-results">No results found</div>
+        } @else {
+          <ul>
+            @for (user of filteredUsers; track user.id) {
+              <li (click)="selectUser(user.id)" >
+                <p class="modal-user-id">
+                  ID: {{ user.id }}
+                </p>
+                <p class="modal-user-title">
+                  {{ user.title }}
+                </p>
+              </li>
+            }
+          </ul>
+        }
+      }
+
+    </div>
+
+    <button class="close-btn" (click)="close.emit()">Close</button>
+  </div>
+</div>

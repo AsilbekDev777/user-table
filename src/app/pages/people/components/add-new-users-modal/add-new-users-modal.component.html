@@ -1,0 +1,44 @@
+<div class="modal-backdrop" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Create Post Form</h2>
+
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>ID</label>
+        <input type="number" formControlName="id">
+        <div *ngIf="postForm.get('id')?.invalid && postForm.get('id')?.touched">
+          ID is required
+        </div>
+      </div>
+
+      <div>
+        <label>User ID</label>
+        <input type="number" formControlName="userId">
+        <div *ngIf="postForm.get('userId')?.invalid && postForm.get('userId')?.touched">
+          User ID is required
+        </div>
+      </div>
+
+      <div>
+        <label>Title</label>
+        <input type="text" formControlName="title">
+        <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched">
+          Title is required (min 3 chars)
+        </div>
+      </div>
+
+      <div>
+        <label>Body</label>
+        <textarea formControlName="body"></textarea>
+        <div *ngIf="postForm.get('body')?.invalid && postForm.get('body')?.touched">
+          Body is required (min 5 chars)
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="submit" [disabled]="postForm.invalid">Submit</button>
+        <button type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
