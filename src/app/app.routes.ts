@@ -8,10 +8,14 @@ import {ProjectsComponent} from './pages/projects/projects.component';
 import {TrainingComponent} from './pages/training/training.component';
 import {TimesheetComponent} from './pages/timesheet/timesheet.component';
 import {LayoutComponent} from './layout/layout.component';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {AuthGuard} from './auth/auth.guard';
+import {RegisterComponent} from './register/register.component';
+import {UserProfileComponent} from './components/header/components/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
-    path: '', component: LayoutComponent, children: [
+    path: '', component: LayoutComponent,canActivate: [AuthGuard], children: [
       {path: '', component: PeopleComponent},
       {path: 'help', component: HelpComponent},
       {path: 'dashboard', component: DashboardComponent},
@@ -23,5 +27,8 @@ export const routes: Routes = [
       {path: 'calendar', component: CalendarComponent},
     ]
   },
-
+  {path:'login', component:LoginPageComponent},
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: UserProfileComponent},
+  { path: '**', redirectTo: '' },
 ];

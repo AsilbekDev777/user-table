@@ -4,9 +4,13 @@
       <div class="header-name-avatar">
         <img src="/images/avatar.png" alt="avatar" class="avatar">
       </div>
-      <span class="user-names">Dominique Ch.</span>
-      <div class="example-action-buttons">
-        <button class="arrowDown"></button>
+      <span class="user-names">{{ userEmail }}</span>
+      <div class="example-action-buttons" >
+        <button class="arrowDown" (click)="toggleDropdown()"></button>
+        <div class="dropdown-menu" *ngIf="showDropdown">
+          <button class="dropdown-item" (click)="goToProfile()">Profile</button>
+          <button class="dropdown-item" (click)="logout()">Logout</button>
+        </div>
       </div>
     </div>
     <div class="top-bar">

@@ -1,0 +1,25 @@
+<form action="" class="login-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <h1>Login to the system</h1>
+  <label class="login-controller">
+    <span>User name</span>
+    <input
+      formControlName="email"
+      class="login-input" type="text" placeholder="Email" />
+  </label>
+
+  <label class="login-controller">
+    <span>Password</span>
+    <input
+      formControlName="password"
+      class="login-input" type="password" placeholder="Password" />
+  </label>
+
+  <button class="login-button" type="submit">Enter</button>
+  <p style="margin-top: 20px; text-align: center; font-size: 14px;">
+    Agar akkaunting bo'lmasa,
+    <a routerLink="/register" style="color: #3f51b5; font-weight: 500;">register ga o't</a>
+  </p>
+</form>
