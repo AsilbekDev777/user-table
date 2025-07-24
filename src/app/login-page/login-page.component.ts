@@ -53,7 +53,7 @@ export class LoginPageComponent  implements HttpInterceptor{
       });
       return next.handle(cloned).pipe(
         catchError((error: HttpErrorResponse) => {
-          // 401 bo‘lsa, refresh qilib qaytadan urinamiz
+          // 401 bo‘lsa, refresh qilib qaytadan tokeni yangilaymiz
           if (error.status === 401) {
             return this.auth.refreshToken().pipe(
               switchMap(() => {

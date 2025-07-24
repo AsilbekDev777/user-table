@@ -35,16 +35,19 @@ export class AuthService {
    refreshToken(): Observable<any> {
       const refreshToken = this.getRefreshToken();
       if (!refreshToken) return throwError(() => new Error('No refresh token found'));
+       const body = new URLSearchParams();
+        body.set('grant_type', 'refresh_token');
+        body.set('refresh_token', refreshToken);
 
       return this.http.post(
-        `https://securetoken.googleapis.com/v1/token?key=[API_KEY]`,
+        `https://securetoken.googleapis.com/v1/token?key=AIzaSyAdENYvQg1gI_1pONInILcbQNX_Ji4Bss8`,
+        body.toString(),
         {
-          grant_type: 'refresh_token',
-          refresh_token: refreshToken
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
       ).pipe(
         tap((res: any) => {
-          this.setToken(res.id_token);
+          this.setToken(res.idToken);
           this.setRefreshToken(res.refresh_token);
         })
       )
