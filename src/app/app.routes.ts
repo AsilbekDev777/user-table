@@ -12,6 +12,7 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {AuthGuard} from './auth/auth.guard';
 import {RegisterComponent} from './register/register.component';
 import {UserProfileComponent} from './components/header/components/user-profile/user-profile.component';
+import {DetailsComponent} from './pages/projects/components/details/details.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export const routes: Routes = [
       {path: 'training', component: TrainingComponent},
       {path: 'timesheet', component: TimesheetComponent},
       {path: 'calendar', component: CalendarComponent},
+      {path: 'details', component: DetailsComponent},
     ]
   },
   {path:'login', component:LoginPageComponent},

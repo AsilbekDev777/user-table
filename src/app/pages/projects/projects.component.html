@@ -1,1 +1,75 @@
-<p>projects works!</p>
+<div class="summary-container">
+  <div class="summary-header">
+    <h2>Detailed Summary</h2>
+  </div>
+
+  <div class="summary-toolbar">
+    <div class="selection-status">
+      <span>{{ selectedCount }} selected</span>
+      <div class="divider"></div>
+      <div class="modify-button">
+        <img src="/images/svgs/modify.svg" alt="modify" class="modify-btn-img">
+        <button disabled class="modify-btn">Modify</button>
+      </div>
+    </div>
+    <div class="filter-status">
+      <img src="/images/svgs/filter.svg" alt="filter" class="filter-img">
+      <button class="filter-btn">Filter</button>
+    </div>
+  </div>
+
+  <table class="summary-table">
+    <thead>
+    <tr>
+      <th><input type="checkbox" class="table-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)"/></th>
+      <th>Name</th>
+      <th>Amount</th>
+      <div class="date-sort">
+        <th>Date</th>
+        <img class="sort-arrow" src="/images/svgs/arrowUp.svg" alt="arrow"/>
+      </div>
+      <th>Category</th>
+      <th>Payment Type</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (element of dataSource.connect() | async; track element){
+        <tr>
+          <td><input type="checkbox" class="table-checkbox" [(ngModel)]="element.selected"
+          (change)="updateSelectedCount()"/></td>
+          <td>{{ element.name }}</td>
+          <td>${{ element.amount.toFixed(2) }}</td>
+          <td>{{ element.date | date: 'MMM d, y' }}</td>
+          <td><span class="category-badge">{{ element.category }}</span></td>
+          <td>{{ element.paymentType }}</td>
+          <td class="main-details-link">
+            <a class="details-link" (click)="openDetails(element)">Details</a>
+            <img src="/images/svgs/arrowRight.svg" alt="arrow right" class="details-link-img">
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+  <div class="add-expense">
+    <button class="add-expense-button" (click)="addNewExpense()"> <!-- Expense modalini ochadi-->
+      <img src="/images/svgs/addExtense.svg" alt="add" class="add-expense-button-image">
+      <p class="add-expense-button-text">Add Expense</p>
+    </button>
+  </div>
+  <app-add-new-expense
+    *ngIf="showModal"
+    (submitData)="handleSubmittedData($event)"
+    (close)="closeModal()"
+  ></app-add-new-expense>
+  <app-details
+    *ngIf="showDetailsModal"
+    [expense]="selectedExpense"
+    (close)="closeDetailsModal()"
+  ></app-details>
+</div>

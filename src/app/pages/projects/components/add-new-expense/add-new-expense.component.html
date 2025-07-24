@@ -1,0 +1,58 @@
+<div class="modal-backdrop" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Expense Details</h2>
+    <p>Add required details to save expense</p>
+
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+      <div>
+        <input formControlName="name" type="text" placeholder="Expense name*" />
+        <div class="error" *ngIf="expenseForm.get('name')?.touched && expenseForm.get('name')?.invalid || expenseForm.get('name')?.errors?.['minlength']">
+          Name is required and Name must be at least 4 characters
+        </div>
+      </div>
+
+      <div>
+        <input formControlName="amount" type="number" placeholder="Amount*" />
+        <div class="error" *ngIf="expenseForm.get('amount')?.touched && expenseForm.get('amount')?.invalid || expenseForm.get('amount')?.errors?.['pattern']">
+          Amount is required and must be greater than 0
+        </div>
+      </div>
+
+      <div>
+        <input formControlName="date" type="date" placeholder="Expense Date*" />
+        <div class="error" *ngIf="expenseForm.get('date')?.touched && expenseForm.get('date')?.invalid">
+          Date is required
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="category">
+          <select formControlName="category">
+            <option value="" disabled >Expense Category*</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+          <div class="error" *ngIf="expenseForm.get('category')?.touched && expenseForm.get('category')?.invalid">
+            Category is required
+          </div>
+        </div>
+
+        <div class="paymentSource">
+          <select formControlName="paymentSource">
+            <option value="" disabled >Payment Source*</option>
+            <option *ngFor="let source of paymentSources" [value]="source">{{ source }}</option>
+          </select>
+          <div class="error" *ngIf="expenseForm.get('paymentSource')?.touched && expenseForm.get('paymentSource')?.invalid">
+            Payment source is required
+          </div>
+        </div>
+      </div>
+
+      <textarea formControlName="comments" placeholder="Comments"></textarea>
+
+      <div class="footer-buttons">
+        <button type="button" (click)="onReset()" class="reset-btn">Reset</button>
+        <button type="submit" class="save-btn" [disabled]="!expenseForm.valid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

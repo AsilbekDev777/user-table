@@ -4,10 +4,14 @@
 >
   <h1>Login to the system</h1>
   <label class="login-controller">
-    <span>User name</span>
+    <span>Registered Email</span>
     <input
       formControlName="email"
-      class="login-input" type="text" placeholder="Email" />
+      class="login-input" type="email" placeholder="Email" />
+    <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+      <small *ngIf="form.get('email')?.errors?.['required']">Email required</small>
+      <small *ngIf="form.get('email')?.errors?.['email']">Invalid email format</small>
+    </div>
   </label>
 
   <label class="login-controller">
@@ -15,6 +19,10 @@
     <input
       formControlName="password"
       class="login-input" type="password" placeholder="Password" />
+    <small *ngIf="form.get('password')?.errors?.['required']" >Password required</small>
+    <small *ngIf="form.get('password')?.errors?.['minlength']">
+      Password must be at least 6 characters
+    </small>
   </label>
 
   <button class="login-button" type="submit">Enter</button>

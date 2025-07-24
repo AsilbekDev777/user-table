@@ -1,0 +1,47 @@
+.details-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.details-modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 22px;
+    color: #333;
+  }
+
+  .detail-row {
+    margin-bottom: 12px;
+    font-size: 15px;
+
+    strong {
+      color: #555;
+    }
+  }
+
+  button {
+    margin-top: 12px;
+    padding: 6px 12px;
+    background: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}

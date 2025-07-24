@@ -49,10 +49,10 @@ export class HeaderComponent {
     this.showDropdown = !this.showDropdown;
   }
 
-  logout() {
-    this.auth.logout();
+  async logout() {
+    await this.auth.logout();
   }
-  goToProfile() {
-    this.router.navigate(['/profile']);
+  async goToProfile() {
+    await this.router.navigate(['/profile']);
   }
 }

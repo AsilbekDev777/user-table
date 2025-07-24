@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {Observable, tap, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthService {
   private readonly API_KEY = 'AIzaSyAdENYvQg1gI_1pONInILcbQNX_Ji4Bss8';
   private readonly SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`;
   private readonly LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`;
+  private refreshKey = 'refreshToken';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,22 +32,47 @@ export class AuthService {
     });
   }
 
+   refreshToken(): Observable<any> {
+      const refreshToken = this.getRefreshToken();
+      if (!refreshToken) return throwError(() => new Error('No refresh token found'));
+
+      return this.http.post(
+        `https://securetoken.googleapis.com/v1/token?key=[API_KEY]`,
+        {
+          grant_type: 'refresh_token',
+          refresh_token: refreshToken
+        }
+      ).pipe(
+        tap((res: any) => {
+          this.setToken(res.id_token);
+          this.setRefreshToken(res.refresh_token);
+        })
+      )
+    }
+
   setToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
+  setRefreshToken(refreshToken: string) {
+    localStorage.setItem(this.refreshKey, refreshToken);
+  }
+
   getToken(): string | null {
     if (typeof window !== 'undefined') {
       return localStorage.getItem(this.TOKEN_KEY);
     }
     return null;
   }
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.refreshKey);
+  }
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  logout() {
+  async logout() {
     localStorage.removeItem(this.TOKEN_KEY);
-    this.router.navigate(['/login']);
+    await this.router.navigate(['/login']);
   }
 
   getUserProfile() {

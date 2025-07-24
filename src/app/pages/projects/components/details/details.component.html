@@ -1,0 +1,13 @@
+<div class="details-backdrop" (click)="onClose()">
+  <div class="details-modal" (click)="$event.stopPropagation()">
+    <h2>Expense Details</h2>
+    <div class="detail-row"><strong>Name:</strong> {{ expense.name }}</div>
+    <div class="detail-row"><strong>Amount:</strong> ${{ expense.amount.toFixed(2) }}</div>
+    <div class="detail-row"><strong>Date:</strong> {{ expense.date | date: 'MMM d, y' }}</div>
+    <div class="detail-row"><strong>Category:</strong> {{ expense.category }}</div>
+    <div class="detail-row"><strong>Payment Type:</strong> {{ expense.paymentType }}</div>
+    <div class="detail-row"><strong>Comment:</strong> {{ expense.details || '-' }}</div>
+
+    <button (click)="onClose()">Close</button>
+  </div>
+</div>

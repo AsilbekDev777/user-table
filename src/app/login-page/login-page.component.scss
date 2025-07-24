@@ -76,3 +76,13 @@
   font-size: 14px;
   text-align: center;
 }
+.error small {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}

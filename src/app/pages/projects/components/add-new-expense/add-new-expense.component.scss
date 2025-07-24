@@ -1,0 +1,132 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #f8f9fb;
+  padding: 24px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 630px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: Arial, sans-serif;
+
+  h2 {
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #6b6b6b;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #007bff;
+      }
+
+      &.ng-invalid.ng-touched {
+        border: 1.5px solid red !important;
+      }
+
+      &.ng-invalid.ng-touched::placeholder {
+        color: red !important;
+      }
+    }
+    input[type="date"] {
+      width: 49%;
+    }
+    .row {
+      display: flex;
+      gap: 13px;
+
+      .category,
+      .paymentSource {
+        flex: 1;
+      }
+
+      select.ng-invalid.ng-touched {
+        border: 1.5px solid red !important;
+      }
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .footer-buttons {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      margin-top: 10px;
+
+      .reset-btn {
+        background: none;
+        border: none;
+        color: #36a8d1;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 6px 10px;
+        margin-right: 10px;
+        text-decoration: none;
+      }
+
+      .save-btn {
+        background-color: #49bee0;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+        color: #FFFFFF;
+
+        &:disabled {
+          opacity: 0.5;
+          background-color: #cccccc;
+          color: #474747;
+          cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+          background-color: #bbb;
+        }
+      }
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+}
