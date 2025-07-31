@@ -31,6 +31,7 @@
       <th>Category</th>
       <th>Payment Type</th>
       <th>Details</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -44,8 +45,14 @@
           <td><span class="category-badge">{{ element.category }}</span></td>
           <td>{{ element.paymentType }}</td>
           <td class="main-details-link">
-            <a class="details-link" (click)="openDetails(element)">Details</a>
+            <a class="details-link" (click)="openDetail(element)">Details</a>
             <img src="/images/svgs/arrowRight.svg" alt="arrow right" class="details-link-img">
+          </td>
+          <td>
+            <div class="actions-buttons">
+              <button class="edit-btn" (click)="openEditModals(element)"><img src="/images/svgs/editIcon.svg" alt="Edit"></button>
+              <button class="delete-btn" (click)="confirmDelete(element)"><img src="/images/svgs/deleteIcon.svg" alt="Delete"></button>
+            </div>
           </td>
         </tr>
       }
@@ -57,19 +64,9 @@
     showFirstLastButtons
   ></mat-paginator>
   <div class="add-expense">
-    <button class="add-expense-button" (click)="addNewExpense()"> <!-- Expense modalini ochadi-->
+    <button class="add-expense-button" (click)="openNewModal()"> <!-- Expense modalini ochadi-->
       <img src="/images/svgs/addExtense.svg" alt="add" class="add-expense-button-image">
       <p class="add-expense-button-text">Add Expense</p>
     </button>
   </div>
-  <app-add-new-expense
-    *ngIf="showModal"
-    (submitData)="handleSubmittedData($event)"
-    (close)="closeModal()"
-  ></app-add-new-expense>
-  <app-details
-    *ngIf="showDetailsModal"
-    [expense]="selectedExpense"
-    (close)="closeDetailsModal()"
-  ></app-details>
 </div>

@@ -1,8 +1,12 @@
 <div class="modal-backdrop" (click)="onCancel()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>Expense Details</h2>
-    <p>Add required details to save expense</p>
-
+    <div class="main-expense-header">
+      <div class="main-expense-header-title">
+        <h2>{{ modalTitle }}</h2>
+        <p>Add required details to save expense</p>
+      </div>
+      <button (click)="onNoClick()" class="close-icon"><img src="/images/svgs/closeIcon.svg" alt="close"></button>
+    </div>
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
       <div>
         <input formControlName="name" type="text" placeholder="Expense name*" />
@@ -51,7 +55,7 @@
 
       <div class="footer-buttons">
         <button type="button" (click)="onReset()" class="reset-btn">Reset</button>
-        <button type="submit" class="save-btn" [disabled]="!expenseForm.valid">Save</button>
+        <button type="submit" class="save-btn" [disabled]="!expenseForm.valid" (click)="onNoClick()">Save</button>
       </div>
     </form>
   </div>

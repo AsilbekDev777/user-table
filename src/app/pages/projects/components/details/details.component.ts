@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter, inject} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details',
@@ -11,10 +12,13 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
-  @Input() expense: any;
   @Output() close = new EventEmitter<void>();
 
-  onClose() {
-    this.close.emit();
+  readonly dialogRef = inject(MatDialogRef<DetailsComponent>);
+  data = inject(MAT_DIALOG_DATA);
+
+  onClose():void {
+    this.dialogRef.close();
   }
+
 }

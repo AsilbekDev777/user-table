@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NgIf} from '@angular/common';
 import {UserSelectModalComponent} from './components/header-search-modal/header-search-modal.component';
 import {AuthService} from '../../auth/auth.service';
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   userEmail: string = 'Loading...';
   showModal = false;
   selectedUserId: number | null = null;
