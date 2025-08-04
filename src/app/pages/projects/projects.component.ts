@@ -8,6 +8,7 @@ import {
 } from '@angular/material/table';
 import {DetailsComponent} from './components/details/details.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -24,6 +25,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class ProjectsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private router: Router) {}
   transactions = [
     {
       id: this.generateId(),
@@ -146,4 +148,9 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       localStorage.setItem('transactions', JSON.stringify(this.transactions));
     });
   }
+  // Open Categories page
+  openCategories(category:string){
+    this.router.navigate(['projects/categories/', category]);
+  }
+
 }

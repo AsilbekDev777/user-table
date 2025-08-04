@@ -1,0 +1,23 @@
+.category-page {
+  padding: 16px;
+  background: #fff;
+  margin-top: 1.3rem;
+  border-radius: 10px;
+  h2 {
+    margin-bottom: 20px;
+  }
+  .category-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f5f5f5;
+    }
+  }
+}

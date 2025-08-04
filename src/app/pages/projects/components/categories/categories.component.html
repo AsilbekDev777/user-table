@@ -1,0 +1,26 @@
+<div class="category-page">
+  <h2>Category: {{ categoryName }}</h2>
+
+  <div *ngIf="filteredTransactions.length === 0">
+    No transactions found in this category.
+  </div>
+
+  <table *ngIf="filteredTransactions.length > 0" class="category-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Payment Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredTransactions">
+        <td>{{ item.name }}</td>
+        <td>${{ item.amount.toFixed(2) }}</td>
+        <td>{{ item.date | date: 'MMM d, y' }}</td>
+        <td>{{ item.paymentType }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

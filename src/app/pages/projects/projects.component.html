@@ -42,7 +42,7 @@
           <td>{{ element.name }}</td>
           <td>${{ element.amount.toFixed(2) }}</td>
           <td>{{ element.date | date: 'MMM d, y' }}</td>
-          <td><span class="category-badge">{{ element.category }}</span></td>
+          <td><button class="category-badge" (click)="openCategories(element.category)">{{ element.category }}</button></td>
           <td>{{ element.paymentType }}</td>
           <td class="main-details-link">
             <a class="details-link" (click)="openDetail(element)">Details</a>
